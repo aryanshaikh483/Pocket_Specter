@@ -65,7 +65,7 @@ export default function ChatPage() {
     let s = activeSession;
     if (!s) { const d=await newChat(userId); s=d.chat_session; setSessions(p=>[...p.filter(x=>x!==s),s]); setActive(s); }
     setLoading(true);
-    try { const res=await uploadDocument(uid,s,file); if(res.error) throw new Error(res.error); setFiles(p=>[...p,file.name]); saveTitle(s,`📎 ${file.name}`); }
+    try { const res=await uploadDocument(userId,s,file); if(res.error) throw new Error(res.error); setFiles(p=>[...p,file.name]); saveTitle(s,`📎 ${file.name}`); }
     catch(err) { setMessages(p=>[...p,{role:"assistant",content:`Upload failed: ${err.message}`}]); }
     finally { setLoading(false); }
   };

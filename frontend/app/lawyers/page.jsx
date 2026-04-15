@@ -1,15 +1,12 @@
 "use client";
-import { useState, useEffect } from "react";
-import { MapPin, Clock, BookOpen, ChevronDown } from "lucide-react";
+import { useState, useEffect } from "react";import { MapPin, Clock, BookOpen } from "lucide-react";
 import Nav from "../../components/Nav";
 
 const DOMAIN_LABELS = {
   criminal_law:   "Criminal Law",
   corporate_law:  "Corporate Law",
-  family_law:     "Family Law",
+  family_law:     "Family & Personal Law",
   consumer_law:   "Consumer Law",
-  womens_law:     "Women's Rights",
-  childrens_law:  "Children's Rights",
   employment_law: "Employment Law",
   property_law:   "Property Law",
   general_law:    "General Practice",
@@ -20,8 +17,6 @@ const DOMAIN_COLORS = {
   corporate_law:  { bg:"#dbeafe", color:"#2563eb" },
   family_law:     { bg:"#fce7f3", color:"#db2777" },
   consumer_law:   { bg:"#fef9c3", color:"#ca8a04" },
-  womens_law:     { bg:"#ede9fe", color:"#7c3aed" },
-  childrens_law:  { bg:"#d1fae5", color:"#059669" },
   employment_law: { bg:"#fef3c7", color:"#d97706" },
   property_law:   { bg:"#e0f2fe", color:"#0284c7" },
   general_law:    { bg:"#f3f4f6", color:"#4b5563" },
@@ -103,8 +98,6 @@ export default function LawyersPage() {
 }
 
 function LawyerCard({ lawyer }) {
-  const [expanded, setExpanded] = useState(false);
-
   return (
     <div className="card" style={{ padding:"24px", display:"flex", flexDirection:"column", gap:14, opacity: lawyer.available ? 1 : 0.6 }}>
       {/* Top row */}
@@ -142,28 +135,24 @@ function LawyerCard({ lawyer }) {
         })}
       </div>
 
-      {/* Expand toggle */}
-      <button onClick={() => setExpanded(v => !v)}
-        style={{ background:"none", border:"none", cursor:"pointer", display:"flex", alignItems:"center", gap:5, fontSize:13, color:"var(--text-muted)", padding:0, alignSelf:"flex-start" }}>
-        {expanded ? "Hide details" : "Show details"}
-        <ChevronDown size={14} style={{ transform: expanded ? "rotate(180deg)" : "none", transition:"transform 0.2s" }} />
-      </button>
-
-      {expanded && (
-        <div style={{ borderTop:"1px solid var(--border)", paddingTop:14, display:"flex", flexDirection:"column", gap:8 }}>
-          <div style={{ fontSize:12, color:"var(--text-muted)" }}>
-            Languages: {lawyer.languages.join(", ")}
-          </div>
-          {lawyer.linkedin && (
-            <a href={lawyer.linkedin} target="_blank" rel="noreferrer"
-              style={{ display:"flex", alignItems:"center", gap:7, fontSize:13, color:"#2563eb", textDecoration:"none", fontWeight:500 }}
-              onMouseEnter={e => e.currentTarget.style.textDecoration="underline"}
-              onMouseLeave={e => e.currentTarget.style.textDecoration="none"}>
-              View LinkedIn Profile →
-            </a>
-          )}
+      {/* Languages + LinkedIn icon */}
+      <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", borderTop:"1px solid var(--border)", paddingTop:12 }}>
+        <div style={{ fontSize:12, color:"var(--text-muted)" }}>
+          🗣 {lawyer.languages.join(", ")}
         </div>
-      )}
+        {lawyer.linkedin ? (
+          <a href={lawyer.linkedin} target="_blank" rel="noreferrer" title="View LinkedIn Profile"
+            style={{ display:"flex", alignItems:"center", justifyContent:"center", width:32, height:32, borderRadius:8, background:"#0a66c2", color:"#fff", textDecoration:"none", flexShrink:0, transition:"opacity 0.15s" }}
+            onMouseEnter={e => e.currentTarget.style.opacity="0.8"}
+            onMouseLeave={e => e.currentTarget.style.opacity="1"}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+          </a>
+        ) : (
+          <div style={{ width:32, height:32 }} />
+        )}
+      </div>
     </div>
   );
 }

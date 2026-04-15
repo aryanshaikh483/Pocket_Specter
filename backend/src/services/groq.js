@@ -475,40 +475,33 @@ const LEGAL_DOMAINS = {
       "company", "business", "fraud", "contract", "agreement", "invoice",
       "payment", "money", "loan", "debt", "cheque", "bounce", "partner",
       "startup", "shares", "directors", "incorporation", "gst", "tax",
-      "mou", "vendor", "client", "breach", "refund", "consumer"
+      "mou", "vendor", "client", "breach", "refund", "consumer",
+      "property", "land", "plot", "flat", "house", "rent", "tenant",
+      "landlord", "ownership", "title", "registry", "encroachment",
+      "trespass", "eviction", "lease", "possession", "builder", "rera",
+      "benami", "inheritance", "will", "succession", "mutation", "stamp duty",
+      "real estate", "apartment", "commercial property", "residential"
     ],
-    context: "Corporate/Commercial Law → Companies Act 2013, Contract Act 1872, Consumer Protection Act 2019, Negotiable Instruments Act (cheque bounce → Section 138 NIA).",
+    context: "Corporate/Commercial Law → Companies Act 2013, Contract Act 1872, Consumer Protection Act 2019, Negotiable Instruments Act (cheque bounce → Section 138 NIA). Also covers Property & Real Estate Law → Transfer of Property Act 1882, RERA 2016, Rent Control Acts (state-specific), Registration Act 1908, Succession Act.",
   },
 
   family_law: {
-    label: "Family Law",
+    label: "Family & Personal Law",
     keywords: [
+      // Marriage & divorce
       "marriage", "divorce", "husband", "wife", "spouse", "alimony",
       "maintenance", "matrimonial", "separation", "annulment", "restitution",
-      "conjugal", "in-laws", "wedding", "nikah", "talaq", "mutual consent"
-    ],
-    context: "Family Law → Hindu Marriage Act / Muslim Personal Law / Special Marriage Act. Consider divorce grounds, maintenance under Section 125 CrPC / BNSS, and matrimonial home rights.",
-  },
-
-  womens_law: {
-    label: "Women's Rights & Protection Law",
-    keywords: [
+      "conjugal", "in-laws", "wedding", "nikah", "talaq", "mutual consent",
       "harassment", "sexual harassment", "posh", "domestic violence",
       "dowry", "dowry death", "stalking", "eve teasing", "rape",
       "molestation", "acid attack", "women", "woman", "female",
-      "modesty", "outraging", "workplace harassment", "metoo"
-    ],
-    context: "Women's Law → Protection of Women from Domestic Violence Act 2005, Dowry Prohibition Act 1961, POSH Act 2013, BNS 2023 (sexual offences). Consider protection orders and compensation.",
-  },
+      "modesty", "outraging", "workplace harassment", "metoo",
 
-  childrens_law: {
-    label: "Children's Rights & Juvenile Law",
-    keywords: [
       "child", "minor", "juvenile", "custody", "guardianship", "adoption",
       "pocso", "child abuse", "child labour", "jjb", "juvenile justice",
       "child support", "cruelty to child", "trafficking", "orphan", "foster"
     ],
-    context: "Children's Law → POCSO Act 2012, Juvenile Justice Act 2015, Guardian and Wards Act 1890, Child Labour (Prohibition) Act. Consider child's best interest principle.",
+    context: "Family & Personal Law → Hindu Marriage Act, Muslim Personal Law, Special Marriage Act, Protection of Women from Domestic Violence Act 2005, Dowry Prohibition Act 1961, POSH Act 2013, POCSO Act 2012, Juvenile Justice Act 2015, Guardian and Wards Act 1890. Consider maintenance (Section 125 BNSS), protection orders, custody, and child welfare.",
   },
 
   employment_law: {
@@ -891,8 +884,17 @@ Practical steps the user can take.
       }
     );
 
+    const aiAnswer = response.data.choices[0].message.content.trim();
+
+    // ── Lawyer Connect: detect domains from question and append suggestions ──
+    const domains     = detectLegalDomains(question);
+    const lawyerBlock = buildLawyerSuggestionBlock(domains, 3);
+    const finalAnswer = lawyerBlock
+      ? `${aiAnswer}\n\n---\n\n${lawyerBlock}`
+      : aiAnswer;
+
     return {
-      answer:      response.data.choices[0].message.content.trim(),
+      answer:      finalAnswer,
       rag_used:    hasContext,
       chunks_used: contextChunks.length,
     };

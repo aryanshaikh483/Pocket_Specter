@@ -135,6 +135,17 @@ const LAWYERS = [
     linkedin:         "https://linkedin.com/in/arveena-sharma-a2149830",
     available:        true,
   },
+    {
+    id:               "L013",
+    name:             "Nirali Shah",
+    domains:          ["corporate_law"],
+    title:            "Advocate & Solicitor | Real Estate Laws",
+    experience_years: 6,
+    location:         "Mumbai, Maharashtra",
+    languages:        ["English", "Hindi"],
+    linkedin:         "https://www.linkedin.com/in/nirali-shah-a9aa5a91/",
+    available:        true,
+  },
 ];
 
 module.exports = { LAWYERS };

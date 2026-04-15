@@ -52,10 +52,8 @@ const formatLawyerCard = (lawyer, index) => {
     `📍 ${lawyer.location} &nbsp;|&nbsp; 🕐 ${lawyer.experience_years} yrs experience  `,
     `⚖️ Expertise: ${domains}  `,
     `🗣 Languages: ${lawyer.languages.join(", ")}  `,
-    `💰 Consultation: ${lawyer.consult_fee}  `,
-    `📧 ${lawyer.email} &nbsp;|&nbsp; 📞 ${lawyer.phone}  `,
-    `📋 Bar Reg: ${lawyer.bar_registration}`,
-  ].join("\n");
+    lawyer.linkedin ? `🔗 [LinkedIn Profile](${lawyer.linkedin})` : "",
+  ].filter(Boolean).join("\n");
 };
 
 // ─── Domain key → human label ─────────────────────────────────────────────────
@@ -63,9 +61,8 @@ const formatLawyerCard = (lawyer, index) => {
 const DOMAIN_LABELS = {
   criminal_law:   "Criminal Law",
   corporate_law:  "Corporate & Commercial Law",
-  family_law:     "Family Law",
-  womens_law:     "Women's Rights & Protection",
-  childrens_law:  "Children's Rights & Juvenile Law",
+  family_law:     "Family & Personal Law",
+  consumer_law:   "Consumer Law",
   employment_law: "Employment & Labour Law",
   property_law:   "Property & Real Estate Law",
   general_law:    "General Legal Practice",
