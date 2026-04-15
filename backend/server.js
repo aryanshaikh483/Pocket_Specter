@@ -4,6 +4,7 @@ const cors = require("cors");
 const { connectDB } = require("./src/db/mongo");
 const chatRoutes     = require("./src/routes/chat");
 const documentRoutes = require("./src/routes/documents");
+const lawyerRoutes   = require("./src/routes/lawyers");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -22,6 +23,7 @@ connectDB();
 // Routes
 app.use("/api", chatRoutes);
 app.use("/api/documents", documentRoutes);
+app.use("/api/lawyers", lawyerRoutes);
 
 // Health check
 app.get("/health", async (req, res) => {

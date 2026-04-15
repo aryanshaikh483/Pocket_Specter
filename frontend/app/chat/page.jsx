@@ -1,5 +1,5 @@
 "use client";
-import { Menu, Home } from "lucide-react";
+import { Menu } from "lucide-react";
 import Link from "next/link";
 import { useState, useEffect, useCallback } from "react";
 import { useAuth, UserButton } from "@clerk/nextjs";
@@ -97,10 +97,12 @@ export default function ChatPage() {
           <span style={{ fontWeight:700, fontSize:15, color:"var(--text-h)", flex:1 }}>
             {activeSession!==null ? `Chat ${activeSession}` : "Pocket Specter"}
           </span>
-          <Link href="/" style={{ display:"flex", alignItems:"center", gap:6, color:"var(--text-muted)", fontSize:13, textDecoration:"none", padding:"6px 12px", borderRadius:8, transition:"all 0.15s" }}
-            onMouseEnter={e=>{e.currentTarget.style.background="#f3f4f6";e.currentTarget.style.color="var(--text-h)";}}
-            onMouseLeave={e=>{e.currentTarget.style.background="transparent";e.currentTarget.style.color="var(--text-muted)";}}
-          ><Home size={14}/> Home</Link>
+          {[["Home", "/"], ["Lawyers", "/lawyers"]].map(([label, href]) => (
+            <Link key={label} href={href} style={{ display:"flex", alignItems:"center", gap:6, color:"var(--text-muted)", fontSize:13, textDecoration:"none", padding:"6px 12px", borderRadius:8, transition:"all 0.15s" }}
+              onMouseEnter={e=>{e.currentTarget.style.background="#f3f4f6";e.currentTarget.style.color="var(--text-h)";}}
+              onMouseLeave={e=>{e.currentTarget.style.background="transparent";e.currentTarget.style.color="var(--text-muted)";}}
+            >{label}</Link>
+          ))}
           <UserButton />
         </div>
         <ChatWindow messages={messages} loading={loading} onSuggestion={handleSend}/>

@@ -1,7 +1,6 @@
 "use client";
-import Link from "next/link";
 import { useState } from "react";
-import { Scale, Plus, Search, Home, Phone, Trash2, MessageCircle } from "lucide-react";
+import { Scale, Plus, Search, Trash2, MessageCircle } from "lucide-react";
 
 export default function Sidebar({ sessions, activeSession, onSelect, onNew, onDelete, chatTitles={} }) {
   const [search, setSearch] = useState("");
@@ -33,16 +32,6 @@ export default function Sidebar({ sessions, activeSession, onSelect, onNew, onDe
           <input value={search} onChange={e=>setSearch(e.target.value)} placeholder="Search chats..."
             style={{ background:"none", border:"none", outline:"none", color:"var(--text-h)", fontSize:13, flex:1, fontFamily:"var(--font)" }}/>
         </div>
-      </div>
-
-      {/* Nav */}
-      <div style={{ padding:"0 14px 8px" }}>
-        {[["Home","/",<Home size={14}/>],["Contact Us","/contactus",<Phone size={14}/>]].map(([l,h,icon])=>(
-          <Link key={l} href={h} style={{ display:"flex", alignItems:"center", gap:8, padding:"9px 10px", borderRadius:8, color:"var(--text-muted)", fontSize:13, textDecoration:"none", transition:"all 0.15s", marginBottom:2 }}
-            onMouseEnter={e=>{e.currentTarget.style.background="#f3f4f6";e.currentTarget.style.color="var(--text-h)";}}
-            onMouseLeave={e=>{e.currentTarget.style.background="transparent";e.currentTarget.style.color="var(--text-muted)";}}
-          >{icon}{l}</Link>
-        ))}
       </div>
 
       {/* Chats */}

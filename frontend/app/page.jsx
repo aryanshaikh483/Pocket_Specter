@@ -1,41 +1,16 @@
 "use client";
 import Link from "next/link";
-import { Scale, FileText, BookOpen, MessageSquare, ArrowRight, Sparkles,
+import { Scale, FileText, BookOpen, MessageSquare, ArrowRight,
          MessageCircle, FileSearch, Mic, History, ShieldCheck,
          User, GraduationCap, Briefcase, Building2, Users,
-         Zap, RefreshCw, Shield, Heart, Github, Twitter, Linkedin } from "lucide-react";
+         Zap, RefreshCw, Shield, Heart, Twitter, Linkedin } from "lucide-react";
 import { useState, useEffect } from "react";
+import Nav from "../components/Nav";
 
 /* ── shared ── */
 const S = { fontFamily:"var(--font)" };
 const BG  = { background:"var(--bg)" };
 const BGA = { background:"var(--bg-alt)" };
-
-/* ── Nav ── */
-function Nav() {
-  const [scrolled, setScrolled] = useState(false);
-  useEffect(() => {
-    const fn = () => setScrolled(window.scrollY > 10);
-    window.addEventListener("scroll", fn, { passive:true });
-    return () => window.removeEventListener("scroll", fn);
-  }, []);
-  return (
-    <nav className={`nav-wrap${scrolled?" scrolled":""}`} style={{ display:"flex", alignItems:"center", justifyContent:"space-between", padding:"14px 48px" }}>
-      <div style={{ display:"flex", alignItems:"center", gap:10 }}>
-        <div style={{ width:36, height:36, borderRadius:10, background:"var(--accent)", display:"flex", alignItems:"center", justifyContent:"center" }}>
-          <Scale size={18} color="#fff" strokeWidth={2.5} />
-        </div>
-        <span style={{ fontWeight:800, fontSize:17, color:"var(--text-h)" }}>Pocket Specter</span>
-      </div>
-      <div className="nav-pill">
-        {[["Home","/"],["Features","#features"],["Chatbot","/chat"],["Contact Us","/contactus"]].map(([l,h])=>(
-          <Link key={l} href={h} className="nav-link">{l}</Link>
-        ))}
-      </div>
-      <Link href="/chat" className="btn-blue"><Sparkles size={14} strokeWidth={2.5} />Try for Free</Link>
-    </nav>
-  );
-}
 
 /* ── Hero ── */
 function Hero() {
@@ -54,7 +29,7 @@ function Hero() {
         </div>
         <h1 style={{ fontSize:72, fontWeight:900, color:"var(--text-h)", lineHeight:1.0, letterSpacing:"-2px", margin:0 }}>Pocket<br/>Specter</h1>
         <p style={{ color:"var(--text-body)", fontSize:16, lineHeight:1.7, maxWidth:380, margin:0 }}>
-          Explore features that boost your productivity. From document automation to advanced research, we&apos;ve got the hard work covered.
+          Explore features that boost your productivity. From document analysis to advanced research, we&apos;ve got the hard work covered.
         </p>
         <div style={{ display:"flex", gap:12 }}>
           <Link href="/chat" className="btn-blue" style={{ padding:"12px 28px", fontSize:15 }}>Get Started <ArrowRight size={16}/></Link>
