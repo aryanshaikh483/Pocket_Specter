@@ -22,36 +22,36 @@ function Hero() {
   return (
     <section style={{ ...BG, minHeight:"100vh", display:"flex", alignItems:"center", padding:"100px 48px 60px", gap:48, ...S }}>
       {/* Left */}
-      <div style={{ flex:1, display:"flex", flexDirection:"column", gap:22 }}>
+      <div style={{ flex:1, display:"flex", flexDirection:"column", gap:26 }}>
         <div style={{ display:"inline-flex", alignItems:"center", gap:8, alignSelf:"flex-start", padding:"6px 16px", borderRadius:999, border:"1px solid rgba(59,130,246,0.2)", background:"rgba(59,130,246,0.06)", color:"var(--accent)", fontSize:13, fontWeight:600 }}>
           <span style={{ width:6, height:6, borderRadius:"50%", background:"var(--accent)", display:"inline-block" }} />
           AI-Powered Legal Intelligence
         </div>
-        <h1 style={{ fontSize:72, fontWeight:900, color:"var(--text-h)", lineHeight:1.0, letterSpacing:"-2px", margin:0 }}>Pocket<br/>Specter</h1>
-        <p style={{ color:"var(--text-body)", fontSize:16, lineHeight:1.7, maxWidth:380, margin:0 }}>
+        <h1 style={{ fontSize:120, fontWeight:900, color:"var(--text-h)", lineHeight:1.0, letterSpacing:"-4px", margin:0 }}>Pocket<br/>Specter</h1>
+        <p style={{ color:"var(--text-body)", fontSize:18, lineHeight:1.75, maxWidth:440, margin:0 }}>
           Explore features that boost your productivity. From document analysis to advanced research, we&apos;ve got the hard work covered.
         </p>
-        <div style={{ display:"flex", gap:12 }}>
-          <Link href="/chat" className="btn-blue" style={{ padding:"12px 28px", fontSize:15 }}>Get Started <ArrowRight size={16}/></Link>
-          <Link href="/contactus" className="btn-outline" style={{ padding:"12px 28px", fontSize:15 }}>Contact Us</Link>
+        <div style={{ display:"flex", gap:14 }}>
+          <Link href="/chat" className="btn-blue" style={{ padding:"14px 32px", fontSize:16 }}>Get Started <ArrowRight size={17}/></Link>
+          <Link href="/contactus" className="btn-outline" style={{ padding:"14px 32px", fontSize:16 }}>Contact Us</Link>
         </div>
-        <div style={{ display:"flex", gap:40, marginTop:8 }}>
+        <div style={{ display:"flex", gap:48, marginTop:8 }}>
           {[["7+","Legal Domains"],["24/7","AI Available"],["Free","To Get Started"]].map(([n,l])=>(
             <div key={l}>
-              <div style={{ fontSize:24, fontWeight:800, color:"var(--accent)" }}>{n}</div>
-              <div style={{ fontSize:13, color:"var(--text-muted)", marginTop:2 }}>{l}</div>
+              <div style={{ fontSize:28, fontWeight:800, color:"var(--accent)" }}>{n}</div>
+              <div style={{ fontSize:14, color:"var(--text-muted)", marginTop:3 }}>{l}</div>
             </div>
           ))}
         </div>
       </div>
       {/* Right card */}
-      <div className="card" style={{ width:440, padding:"48px 40px", display:"flex", flexDirection:"column", alignItems:"center", textAlign:"center", gap:18, boxShadow:"0 8px 48px rgba(0,0,0,0.1)" }}>
+      <div className="card" style={{ width:550, padding:"48px 40px", display:"flex", flexDirection:"column", marginRight:"8%" ,alignItems:"center", textAlign:"center", gap:18, boxShadow:"0 8px 48px rgba(0,0,0,0.1)" }}>
         <div style={{ width:64, height:64, borderRadius:18, background:"var(--accent)", display:"flex", alignItems:"center", justifyContent:"center", boxShadow:"0 4px 20px rgba(59,130,246,0.35)" }}>
           <Scale size={32} color="#fff" strokeWidth={2} />
         </div>
-        <h2 style={{ fontSize:30, fontWeight:800, color:"var(--text-h)", lineHeight:1.2, margin:0 }}>Your Personal Legal AI Assistant</h2>
-        <p style={{ color:"var(--text-muted)", fontSize:15, lineHeight:1.7, margin:0 }}>Say goodbye to expensive legal consultation, long waits for appointments, and confusing legal texts.</p>
-        <Link href="/chat" className="btn-blue" style={{ padding:"14px 48px", fontSize:16, borderRadius:999, width:"100%", justifyContent:"center" }}>Try for Free →</Link>
+        <h2 style={{ fontSize:50, fontWeight:900, color:"var(--text-h)", lineHeight:1.2, margin:0 }}>Your Personal Legal AI Assistant</h2>
+        <p style={{ color:"var(--text-muted)", fontSize:17, lineHeight:1.7, margin:0 }}>Say goodbye to expensive legal consultation, long waits for appointments, and confusing legal texts.</p>
+        <Link href="/chat" className="btn-blue" style={{ padding:"14px 48px", fontSize:20, borderRadius:999, width:"100%", justifyContent:"center" }}>Try for Free →</Link>
         <div style={{ display:"flex", gap:10, flexWrap:"wrap", justifyContent:"center" }}>
           {features.map(({label,icon})=>(
             <span key={label} style={{ display:"flex", alignItems:"center", gap:6, padding:"8px 16px", borderRadius:999, border:"1px solid var(--border)", background:"#f9fafb", color:"var(--text-body)", fontSize:13, fontWeight:500 }}>{icon}{label}</span>
