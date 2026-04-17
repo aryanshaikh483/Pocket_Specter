@@ -4,7 +4,7 @@ import { Paperclip, Send, FileText, Loader2, X, Mic, MicOff } from "lucide-react
 
 const EXT = name => name.split(".").pop().toUpperCase() || "FILE";
 
-export default function ChatInput({ onSend, onUpload, onRemoveFile, disabled, uploadedFiles=[] }) {
+export default function ChatInput({ onSend, onUpload, onRemoveFile, disabled, uploadedFiles=[], hideAttach=false }) {
   const [text, setText] = useState("");
   const [listening, setListening] = useState(false);
   const [hasSR, setHasSR] = useState(false);
@@ -62,11 +62,13 @@ export default function ChatInput({ onSend, onUpload, onRemoveFile, disabled, up
         />
         <div style={{ display:"flex", alignItems:"center", gap:10, padding:"6px 16px 12px" }}>
           <input ref={fileInputRef} type="file" accept=".pdf,.docx,.txt" style={{ display:"none" }} onChange={handleFile}/>
-          <button onClick={()=>fileInputRef.current?.click()} disabled={disabled} title="Upload PDF, DOCX or TXT"
-            style={{ background:"none", border:"none", cursor:disabled?"not-allowed":"pointer", color:hasDoc?"var(--accent)":"var(--text-muted)", display:"flex", alignItems:"center", padding:4, borderRadius:6, transition:"color 0.15s" }}
-            onMouseEnter={e=>{if(!disabled)e.currentTarget.style.color="var(--accent)";}}
-            onMouseLeave={e=>{e.currentTarget.style.color=hasDoc?"var(--accent)":"var(--text-muted)";}}
-          ><Paperclip size={18} strokeWidth={1.8}/></button>
+          {!hideAttach && (
+            <button onClick={()=>fileInputRef.current?.click()} disabled={disabled} title="Upload PDF, DOCX or TXT"
+              style={{ background:"none", border:"none", cursor:disabled?"not-allowed":"pointer", color:hasDoc?"var(--accent)":"var(--text-muted)", display:"flex", alignItems:"center", padding:4, borderRadius:6, transition:"color 0.15s" }}
+              onMouseEnter={e=>{if(!disabled)e.currentTarget.style.color="var(--accent)";}}
+              onMouseLeave={e=>{e.currentTarget.style.color=hasDoc?"var(--accent)":"var(--text-muted)";}}
+            ><Paperclip size={18} strokeWidth={1.8}/></button>
+          )}
           <div style={{ flex:1 }}/>
           {hasSR && (
             <button onClick={toggleVoice} disabled={disabled}
